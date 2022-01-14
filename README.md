@@ -1,1 +1,41 @@
-# LITReview-Web-Application
+# LITReview
+
+## Installation on Windows
+__1- You need to create virtual env with this command :__
+
+*The virtual env is installed in the directory where you are (the path) with your terminal*
+
+- ```python -m venv env```
+
+__2- Now you have to activate your virtual env, the default path is :__
+- if you use PowerShell :
+``` env/Scripts/activate.ps1```
+- if you use CMD or terminal that supports __.bat__ :
+``` env/Scripts/activate.bat```
+
+## Installation on Linux
+__1- You need to create virtual env with this command :__
+
+*The virtual env is installed in the directory where you are (the path) with your terminal*
+
+- ```python -m venv env```
+
+__2- Now you have to activate your virtual env, the default path is :__
+``` source env/bin/activate```
+
+## Installation on Mac
+__1- You need to create virtual env with this command :__
+
+*The virtual env is installed in the directory where you are (the path) with your terminal*
+
+- ```python -m venv env```
+
+__2- Now you have to activate your virtual env, the default path is :__
+``` source env/bin/activate```
+
+## Libraries
+__This program need some libraries, for installing them, use this command (in your virtual env) :__
+
+*View requirements.txt to know which library/version is used*
+
+- ```pip install -r requirements.txt```
