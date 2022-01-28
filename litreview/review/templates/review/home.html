@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-    <p>Vous êtes connecté !</p>
+    <h2>Flux</h2>
+    <a href="{% url 'ticket-creation' %}">Demander une critique</a>
+    <a href="{% url 'review-creation' %}">Créer une critique</a>
 {% endblock content %}

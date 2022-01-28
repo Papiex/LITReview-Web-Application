@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h2>Vos Posts</h2>
+    {% for ticket in tickets %}
+    <p>Vous avez publié un ticket | {{ ticket.time_created }}</p>
+        <h4>Ticket : {{ ticket.title }}</h4>
+        <img src="{{ ticket.image.url }}">
+        <p>{{ ticket.description }}</p>
+        <p><a href="{% url 'edit-ticket' ticket.id %}">Modifier</a></p>
+        <a class="btn btn-outline-danger" href="{% url 'delete-ticket' ticket.id %}">Supprimer</a>
+    {% endfor %}
+{% endblock content %}
