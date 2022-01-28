@@ -51,9 +51,11 @@ def edit_ticket(request, ticket_id: int):
 @login_required
 def delete_ticket(request, ticket_id):
     """delete ticket"""
-    ticket = models.Ticket.objects.filter(id=ticket_id)
-    ticket.delete()
-    return redirect('posts')
+    ticket = get_object_or_404(models.Ticket, id=ticket_id)
+    if request.method == 'POST':
+        ticket.delete()
+        return redirect('posts')
+    return render(request, 'review/delete_ticket.html', {'ticket': ticket})
 
 @login_required
 def review_creation(request):

@@ -1,9 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h3>Êtes-vous sur de supprimer ce ticket ?</h3>
+    <h2>Êtes-vous sur de supprimer ce ticket ?</h2>
+    <h3>{{ ticket.title }}</h3>
+    <img src="{{ ticket.image.url }}">
+    <p>{{ ticket.description }}</p>
     <form method="post">
         {{ delete_form }}
         {% csrf_token %}
         <button type="submit" >Supprimer</button>
+        <button type="button" ><a href="{% url 'posts' %}">Retour</a></button>
     </form>
 {% endblock content %}
