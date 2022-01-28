@@ -1,12 +1,28 @@
 {% extends 'base.html' %}
 {% block content %}
     <h2>Vos Posts</h2>
-    {% for ticket in tickets %}
-    <p>Vous avez publié un ticket | {{ ticket.time_created }}</p>
-        <h4>Ticket : {{ ticket.title }}</h4>
-        <img src="{{ ticket.image.url }}">
-        <p>{{ ticket.description }}</p>
-        <p><a href="{% url 'edit-ticket' ticket.id %}">Modifier</a></p>
-        <a class="btn btn-outline-danger" href="{% url 'delete-ticket' ticket.id %}">Supprimer</a>
+
+    {% for review in reviews %}
+        {% if review.user == user %}
+            <p>Vous avez publié une critique | {{ review.time_created }}</p>
+            <h3>{{ review.headline }} - {{ review.rating }}</h3>
+            <p>{{ review.body }}</p>
+            <p>Ticket - Vous</p>
+            <p>{{ review.ticket.title }}</p>
+            <img src="{{review.ticket.image.url}}">
+            <p><a href="{% url 'edit-review' review.id %}">Modifier</a></p>
+        {% endif %}
     {% endfor %}
+
+    {% for ticket in tickets %}
+        {% if ticket.user == user %}
+        <p>Vous avez publié un ticket | {{ ticket.time_created }}</p>
+            <p>{{ ticket.title }}</p>
+            <img src="{{ ticket.image.url }}">
+            <p>{{ ticket.description }}</p>
+            <p><a href="{% url 'edit-ticket' ticket.id %}">Modifier</a></p>
+            <a class="btn btn-outline-danger" href="{% url 'delete-ticket' ticket.id %}">Supprimer</a>
+        {% endif %}
+    {% endfor %}
+
 {% endblock content %}

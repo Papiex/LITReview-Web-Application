@@ -34,6 +34,7 @@ urlpatterns = [
     path('review/edit_ticket/<int:ticket_id>/', review.views.edit_ticket, name='edit-ticket'),
     path('review/delete_ticket/<int:ticket_id>/', review.views.delete_ticket, name='delete-ticket'),
     path('review/review_creation/', review.views.review_creation, name='review-creation'),
+    path('review/edit_review/<int:review_id>/', review.views.edit_review, name='edit-review'),
     path('posts/', review.views.posts, name='posts'),
 ]
 urlpatterns += staticfiles_urlpatterns()

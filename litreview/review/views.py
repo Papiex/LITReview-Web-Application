@@ -14,7 +14,8 @@ def home(request):
 def posts(request):
     """redirect to posts.html"""
     tickets = models.Ticket.objects.all()
-    return render(request, 'review/posts.html', context={'tickets': tickets})
+    reviews = models.Review.objects.all()
+    return render(request, 'review/posts.html', context={'tickets': tickets, 'reviews': reviews})
 
 @login_required
 def ticket_creation(request):
@@ -44,7 +45,7 @@ def edit_ticket(request, ticket_id: int):
         edit_form = forms.TicketForm(request.POST, request.FILES, instance=ticket)
         if edit_form.is_valid():
             edit_form.save()
-            return redirect('home')
+            return redirect('posts')
     return render(request, 'review/edit_ticket.html', context={'edit_form': edit_form})
 
 @login_required
@@ -73,3 +74,15 @@ def review_creation(request):
             return redirect('home')
     context = {'ticket_form': ticket_form, 'review_form': review_form}
     return render(request, 'review/review_creation.html', context=context)
+
+@login_required
+def edit_review(request, review_id: int):
+    """get info of review and edit it"""
+    review = get_object_or_404(models.Review, id=review_id)
+    edit_form = forms.ReviewForm(instance=review)
+    if request.method == 'POST':
+        edit_form = forms.ReviewForm(request.POST, request.FILES, instance=review)
+        if edit_form.is_valid():
+            edit_form.save()
+            return redirect('posts')
+    return render(request, 'review/edit_review.html', context={'edit_form': edit_form})
