@@ -13,8 +13,12 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from unicodedata import name
 from django.contrib import admin
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 import authentication.views
 import review.views
@@ -25,4 +29,13 @@ urlpatterns = [
     path('logout/', authentication.views.logout_user, name='logout'),
     path('signup/', authentication.views.signup_page, name='signup'),
     path('home/', review.views.home, name='home'),
+    path('review/ticket_creation/', review.views.ticket_creation, name='ticket-creation'),
+    path('review/view_ticket/<int:ticket_id>/', review.views.view_ticket, name='view-ticket'),
+    path('review/edit_ticket/<int:ticket_id>/', review.views.edit_ticket, name='edit-ticket'),
+    path('review/delete_ticket/<int:ticket_id>/', review.views.delete_ticket, name='delete-ticket'),
+    path('review/review_creation/', review.views.review_creation, name='review-creation'),
+    path('posts/', review.views.posts, name='posts'),
 ]
+urlpatterns += staticfiles_urlpatterns()
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
