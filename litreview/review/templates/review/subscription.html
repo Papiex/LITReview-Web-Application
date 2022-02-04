@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<h3>Suivre d'autres utilisateurs</h3>
+    <form method="post" autocomplete="off">
+        <input list="users" class="form-control" type="text" name="research">
+        <button class="btn btn-info" type="submit">Rechercher</button>
+        <datalist id="users">
+            {% for user in users %}
+                <option value="{{ user }}"></option>
+            {% endfor %}
+        </datalist>
+        {% csrf_token %}
+    </form>
+
+    
+{% if search %}
+    <h4>Résultat de votre recherche :</h4>
+    {% for user_data in search %}
+        {% if user_data == user %}
+            {{ user_data }} 
+            <button class="btn btn-danger">S'abonner</button>
+            <p class="danger">Vous ne pouvez pas vous abonnez à vous même !</p>
+        {% elif user_data and already_subscribe %}
+            {{ user_data }}
+            <button class="btn btn-danger">S'abonner</button>
+            <p>Vous êtes déja abonné à cette utilisateur</p>
+        {% elif user_data %}
+            {{ user_data }}
+            <a class="btn btn-success" href="{% url 'subscribe' user_data.id %}" role="button">S'abonner</a>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
+<h3>Vos abonnements</h3>
+{% if subscriptions %}
+    {% for user in subscriptions %}
+        <p>{{ user.followed_user.username }}
+            <a class="btn btn-danger" href="{% url 'unsubscribe' user.followed_user.id %}" role="button">Se désabonner</a>
+        </p>
+    {% endfor %}
+{% endif %}
+
+<h3>Vos abonnés</h3>
+{% if subscribers %}
+    {% for user in subscribers %}
+        {{ user.user.username }}
+    {% endfor %}
+{% endif %}
+
+
+{% endblock content %}
