@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h2>Créer une critique en réponse à {{ ticket.user }}</h2>
+    <p>{{ ticket.description }}</p>
+    <img src="{{ ticket.image.url }}">
+
+    <form method="post" enctype="multipart/form-data">
+        <p>Critique</p>
+        {{ review_form.as_p }}
+        {% csrf_token %}
+        <button type="submit" >Envoyer</button>
+        <button type="button" >
+            <a href="{% url 'home' %}">Retour</a>
+        </button>
+    </form>
+{% endblock content %}

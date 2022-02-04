@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h2>Êtes-vous sur de supprimer cette critique ?</h2>
+    <h3>{{ review.headline }}</h3>
+    <img src="{{ review.ticket.image.url }}">
+    <p>{{ review.body }}</p>
+    <form method="post">
+        {{ delete_form }}
+        {% csrf_token %}
+        <button type="submit" >Supprimer</button>
+        <button type="button" ><a href="{% url 'posts' %}">Retour</a></button>
+    </form>
+{% endblock content %}
