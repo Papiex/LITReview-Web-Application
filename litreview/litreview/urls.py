@@ -28,14 +28,18 @@ urlpatterns = [
     path('', authentication.views.login_page, name='login'),
     path('logout/', authentication.views.logout_user, name='logout'),
     path('signup/', authentication.views.signup_page, name='signup'),
-    path('home/', review.views.home, name='home'),
+    path('home/', review.views.flux, name='home'),
     path('review/ticket_creation/', review.views.ticket_creation, name='ticket-creation'),
-    path('review/view_ticket/<int:ticket_id>/', review.views.view_ticket, name='view-ticket'),
     path('review/edit_ticket/<int:ticket_id>/', review.views.edit_ticket, name='edit-ticket'),
     path('review/delete_ticket/<int:ticket_id>/', review.views.delete_ticket, name='delete-ticket'),
     path('review/review_creation/', review.views.review_creation, name='review-creation'),
+    path('review/review_creation_ticket/<int:ticket_id>/', review.views.review_response_ticket, name='review-creation-ticket'),
     path('review/edit_review/<int:review_id>/', review.views.edit_review, name='edit-review'),
+    path('review/delete_review/<int:review_id>/', review.views.delete_review, name='delete-review'),
     path('posts/', review.views.posts, name='posts'),
+    path('subscription/', review.views.subscription_view, name='subscription'),
+    path('subscription/subscribe/<int:adding_follower_id>/', review.views.subscribing, name='subscribe'),
+    path('subscription/unsubscribe/<int:deleting_follower_id>/', review.views.subscribing, name='unsubscribe'),
 ]
 urlpatterns += staticfiles_urlpatterns()
 if settings.DEBUG:
