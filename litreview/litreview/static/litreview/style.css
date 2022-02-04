@@ -1,37 +1,8 @@
 /*base.html*/
 
-.title{
-    text-align: center;
-    font-size: 36px;
-    line-height: 180%;
-    flex:1 0 auto;
-    border: 1px red;
-    border: solid 1px black;
-}
-.links{
-    position:absolute;
-    display: flex;
-    right: 4%;
-    top: 4%;
-    font-size: 1.5em;
-    margin-right: 10%;
-}
-.links a{
-    margin-left: 10%;
-}
-a:link, a:visited, a:active, a:focus, a:hover {
-    text-decoration: none;
-    color: black;
-}
+.navbar-brand {
+    transform: translateX(-50%);
+    left: 50%;
+    position: absolute;
+  }
 
-/*login.html*/
-
-.general-login-box{
-    display: flex;
-    justify-content: space-between;
-    margin-left: 25%;
-    margin-right: 25%;
-}
-.login-button, .login-title{
-    margin-left: 25%;
-}
