@@ -1,0 +1,13 @@
+{% if not post.ticket.is_archived %}
+    {% if post.user == user %}
+        <p>Vous avez publiez une critique</p>
+    {% else %}
+        <p>{{ post.user }} à publiez une critique</p>
+    {% endif %}
+    <p>{{ post.time_created }}</p>
+    {% if post.ticket.user == user %}
+        <p>Ticket - Vous</p>
+    {% else %}
+        <p>Ticket - {{ post.ticket.user }}</p>
+    {% endif %}
+{% endif %}

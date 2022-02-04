@@ -1,0 +1,15 @@
+{% if not post.is_archived %}
+    {% if post.user == user %}
+        <p>Vous avez demander une critique</p>
+    {% else %}
+        <p>{{ post.user }} à demander une critique</p>
+    {% endif %}
+    <p>{{ post.time_created }}</p>
+    <h3>{{ post.title }}</h3>
+    <p>{{ post.description }}</p>
+    <img src="{{ post.image.url }}">
+    {% if not post.is_processed %}
+        <a class="btn btn-primary mt-3" href="{% url 'review-creation-ticket' post.id %}" role="button">Ajouter une critique</a>
+    {% endif %}
+{% endif %}
+
