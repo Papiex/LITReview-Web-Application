@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h2>Flux</h2>
+    <a class="btn btn-primary mt-3" href="{% url 'ticket-creation' %}" role="button">Demander une critique</a>
+    <a class="btn btn-primary mt-3" href="{% url 'review-creation' %}" role="button">Créer une critique</a>
+
+
+
+    <h2>TEST</h2>
+    {% for post in posts %}
+        {% if post.content_type == 'TICKET' %}
+            {% include 'review/ticket_snippet.html' %}
+        {% elif post.content_type == 'REVIEW' %}
+            {% include 'review/review_snippet.html' %}
+        {% endif %}
+    {% endfor %}
+
+{% endblock content %}
