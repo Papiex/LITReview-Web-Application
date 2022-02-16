@@ -24,9 +24,13 @@ def posts(request):
     """
     Get list of all tickets and reviews and redirect to posts.html
     """
-    tickets = Ticket.objects.all()
-    reviews = Review.objects.all()
-    return render(request, 'review/posts.html', context={'tickets': tickets, 'reviews': reviews})
+    tickets = Ticket.objects.filter(user=request.user)
+    reviews = Review.objects.filter(user=request.user)
+    tickets = tickets.annotate(content_type=Value('TICKET', CharField()))
+    reviews = reviews.annotate(content_type=Value('REVIEW', CharField()))
+    posts = sorted(chain(reviews, tickets), key=lambda post: post.time_created, reverse=True)
+
+    return render(request, 'review/posts.html', context={'posts': posts})
 
 @login_required
 def ticket_creation(request):
@@ -53,7 +57,7 @@ def edit_ticket(request, ticket_id: int):
         if edit_form.is_valid():
             edit_form.save()
             return redirect('posts')
-    return render(request, 'review/edit_ticket.html', context={'edit_form': edit_form})
+    return render(request, 'review/edit_ticket.html', context={'edit_form': edit_form, 'ticket': ticket})
 
 @login_required
 def delete_ticket(request, ticket_id: int):
@@ -78,6 +82,7 @@ def review_creation(request):
         if all([ticket_form.is_valid(), review_form.is_valid()]):
             ticket = ticket_form.save(commit=False)
             ticket.user = request.user
+            ticket.is_processed = True
             ticket.save()
             review = review_form.save(commit=False)
             review.user = request.user
@@ -124,6 +129,9 @@ def edit_review(request, review_id: int):
 def delete_review(request, review_id: int):
     """Get and delete the selected review"""
     review = get_object_or_404(Review, id=review_id)
+    ticket = get_object_or_404(Ticket, id=review.ticket.id)
+    ticket.is_processed = False
+    ticket.save(update_fields=['is_processed'])
     if request.method == 'POST':
         review.delete()
         return redirect('posts')
@@ -137,6 +145,11 @@ def flux(request):
     User = get_user_model()
     users = User.objects.all()
 
+    followeds = UserFollows.objects.filter(user=request.user).select_related("followed_user")
+    followeds_group = [user.followed_user for user in followeds]
+    followeds_group.append(request.user)
+    print(followeds_group)
+
     tickets = tickets.annotate(content_type=Value('TICKET', CharField()))
     reviews = reviews.annotate(content_type=Value('REVIEW', CharField()))
 
@@ -146,7 +159,7 @@ def flux(request):
         reverse=True
     )
 
-    return render(request, 'review/flux.html', context={'posts': posts, 'users': users})
+    return render(request, 'review/flux.html', context={'posts': posts, 'users': users, 'followeds': followeds_group})
 
 @login_required
 def subscription_view(request):
