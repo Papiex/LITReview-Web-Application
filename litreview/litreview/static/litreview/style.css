@@ -1,4 +1,6 @@
-/*base.html*/
+#color-review{ background: rgba(255, 249, 169, 0.521)}
+
+#color-ticket{ background: rgba(180, 180, 180, 0.651)}
 
 .navbar-brand {
     transform: translateX(-50%);
@@ -6,3 +8,25 @@
     position: absolute;
   }
 
+.user {
+  transform: translateX(-50%);
+  left: 2%;
+  position: absolute;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex: 1 0 auto;
+}
+
+.footer {
+  flex-shrink: 0;
+}

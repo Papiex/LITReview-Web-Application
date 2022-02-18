@@ -1,13 +1,27 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h2>Êtes-vous sur de supprimer cette critique ?</h2>
-    <h3>{{ review.headline }}</h3>
-    <img src="{{ review.ticket.image.url }}">
-    <p>{{ review.body }}</p>
-    <form method="post">
-        {{ delete_form }}
-        {% csrf_token %}
-        <button type="submit" >Supprimer</button>
-        <button type="button" ><a href="{% url 'posts' %}">Retour</a></button>
-    </form>
+    <h2 class="text-center mt-5">Êtes-vous sur de vouloir supprimer cette critique ?</h2>
+    <div class="container mt-5 mb-5">
+        <div id="color-review" class="border border-dark border-2">
+            <div class="container">
+                <h4 class="mt-3">Titre</h4>
+                {{ review.headline }}
+                <h4 class="mt-3">Note</h4>
+                <h4>{{ review.rating|safe }}</h4>
+                <h4 class="mt-3">Commentaire</h4>
+                {{ review.body }}
+            </div>
+            <div class="container mt-5 mb-3">
+                <form method="post">
+                    {{ delete_form }}
+                    {% csrf_token %}
+                    <div class="d-flex justify-content-between">
+                        <button class="btn btn-danger" type="submit" >Supprimer</button>
+                        <button class="btn btn-dark" type="button" >
+                            <a class="text-decoration-none text-white" href="{% url 'posts' %}">Retour</a>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
 {% endblock content %}

@@ -1,12 +1,49 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h2>Modifier la critique</h2>
-    <form method="post" enctype="multipart/form-data">
-        {{ edit_form.as_p }}
-        {% csrf_token %}
-        <button type="submit" >Sauvegarder</button>
-        <button type="button" >
-            <a href="{% url 'posts' %}">Retour</a>
-        </button>
-    </form>
+    <h2 class="text-center mt-5 mb-5">Modifier la critique</h2>
+    <div class="container">
+        <div id="color-review" class="border border-dark border-2">
+            <h4 class="ms-2">Vous êtes en train de poster une réponse à {{ review.ticket.user }}</h4>
+            <div class="container mt-5 mb-5">
+                <div id="color-ticket" class="border border-dark border-2">
+                    <div class="container">
+                        <div class="d-flex justify-content-between fw-light">
+                            {% if post.user == user %}
+                                <p>Vous avez demander une critique</p>
+                            {% else %}
+                                <p>{{ review.ticket.user }} à demander une critique</p>
+                            {% endif %}
+                            <p>{{ review.ticket.time_created }}</p>
+                        </div>
+                    </div>
+        
+                    <h4 class="ps-3 text-decoration-underline">{{ review.ticket.title }}</h4>
+                    <p class="ps-3">{{ review.ticket.description }}</p>
+                    <img class="ps-3 pb-3" src="{{ review.ticket.image.url }}">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-2">
+        <div id="color-review" class="border border-dark border-2">
+            <h3 class="ms-2 mb-4">Critique</h3>
+            <form class="ms-4" method="post" enctype="multipart/form-data">
+                <h4>Titre</h4>
+                {{ edit_form.headline }}
+                <h4 class="mt-3">Note</h4>
+                {{ edit_form.rating }}
+                <h4 class="mt-3">Commentaire</h4>
+                {{ edit_form.body }}
+                {% csrf_token %}
+                <div class="container mt-5">
+                    <div class="d-flex justify-content-between">
+                        <button class="btn btn-primary" type="submit" >Sauvegarder</button>
+                        <button class="btn btn-dark me-4" type="button" >
+                            <a class="text-decoration-none text-white" href="{% url 'posts' %}">Retour</a>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 {% endblock content %}

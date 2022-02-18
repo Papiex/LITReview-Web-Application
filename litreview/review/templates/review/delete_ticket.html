@@ -1,13 +1,35 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h2>Êtes-vous sur de supprimer ce ticket ?</h2>
-    <h3>{{ ticket.title }}</h3>
-    <img src="{{ ticket.image.url }}">
-    <p>{{ ticket.description }}</p>
-    <form method="post">
-        {{ delete_form }}
-        {% csrf_token %}
-        <button type="submit" >Supprimer</button>
-        <button type="button" ><a href="{% url 'posts' %}">Retour</a></button>
-    </form>
+
+<h2 class="text-center mt-5">Êtes-vous sur de vouloir supprimer ce ticket ?</h2>
+<div class="container mt-5 mb-5">
+    <div id="color-ticket" class="border border-dark border-2">
+        <div class="container">
+            <div class="d-flex justify-content-between fw-light">
+                {% if ticket.user == user %}
+                    <p>Vous avez demander une critique</p>
+                {% else %}
+                    <p>{{ ticket.user }} à demander une critique</p>
+                {% endif %}
+                <p>{{ ticket.time_created }}</p>
+            </div>
+        </div>
+
+        <h4 class="ps-3 text-decoration-underline">{{ ticket.title }}</h4>
+        <p class="ps-3">{{ ticket.description }}</p>
+        <img class="ps-3 pb-3" src="{{ ticket.image.url }}">
+        <div class="container mt-2">
+            <form method="post">
+                {{ delete_form }}
+                {% csrf_token %}
+                <div class="d-flex justify-content-between">
+                    <button class="btn btn-danger" type="submit" >Supprimer</button>
+                    <button class="btn btn-dark" type="button" >
+                        <a class="text-decoration-none text-white" href="{% url 'posts' %}">Retour</a>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock content %}
