@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.contrib.auth import get_user_model
 
 from review.models import ticket, review, userfollows
 
@@ -19,8 +20,11 @@ class ReviewAdmin(admin.ModelAdmin):
 
 class UserFollowsAdmin(admin.ModelAdmin):
     """For administration panel"""
+    model = userfollows.UserFollows
     list_display = ['user', 'followed_user']
 
+    
 admin.site.register(ticket.Ticket, TicketAdmin)
 admin.site.register(review.Review, ReviewAdmin)
 admin.site.register(userfollows.UserFollows, UserFollowsAdmin)
+
