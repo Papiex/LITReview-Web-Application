@@ -123,7 +123,7 @@ def edit_review(request, review_id: int):
         if edit_form.is_valid():
             edit_form.save()
             return redirect('posts')
-    return render(request, 'review/edit_review.html', context={'edit_form': edit_form})
+    return render(request, 'review/edit_review.html', context={'edit_form': edit_form, 'review': review})
 
 @login_required
 def delete_review(request, review_id: int):
