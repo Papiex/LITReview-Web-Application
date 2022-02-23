@@ -54,7 +54,7 @@ __1- You need to create virtual env with this command :__
 
 - ```python3 -m venv env```
 
-__2- Now you have to activate your virtual env, the default path is :__
+__2- Now you have to activate your virtual env, the command is :__
 ``` source env/bin/activate```
 
 ## Installation on Mac
