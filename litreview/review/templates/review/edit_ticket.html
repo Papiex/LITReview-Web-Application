@@ -14,7 +14,9 @@
                     </div>
                     <div class="container">
                         <h4 class="pb-2">Image</h4>
-                        <img src="{{ ticket.image.url }}">
+                        {% if ticket.image %}
+                            <img src="{{ ticket.image.url }}">
+                        {% endif %}
                         <div class="">{{ edit_form.image }}</div>
                     </div>
                 </div>

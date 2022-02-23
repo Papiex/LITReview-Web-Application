@@ -5,9 +5,9 @@
             <div class="container">
                 <div class="d-flex justify-content-between fw-light">
                     {% if post.user == user %}
-                        <p>Vous avez demander une critique</p>
+                        <p>Vous avez demandé une critique</p>
                     {% else %}
-                        <p>{{ post.user }} à demander une critique</p>
+                        <p>{{ post.user }} à demandé une critique</p>
                     {% endif %}
                     <p>{{ post.time_created }}</p>
                 </div>
@@ -15,7 +15,9 @@
 
             <h4 class="ps-3 text-decoration-underline">{{ post.title }}</h4>
             <p class="ps-3">{{ post.description }}</p>
-            <img class="ps-3 pb-3" src="{{ post.image.url }}">
+            {% if post.image %}
+                <img class="ps-3 pb-3" src="{{ post.image.url }}">
+            {% endif %}
             {% if not post.is_processed %}
                 <div class="d-flex flex-row-reverse">
                     <div class="p-2">

@@ -19,7 +19,9 @@
         
                     <h4 class="ps-3 text-decoration-underline">{{ ticket.title }}</h4>
                     <p class="ps-3">{{ ticket.description }}</p>
-                    <img class="ps-3 pb-3" src="{{ ticket.image.url }}">
+                    {% if ticket.image %}
+                        <img class="ps-3 pb-3" src="{{ ticket.image.url }}">
+                    {% endif %}
                 </div>
             </div>
         </div>

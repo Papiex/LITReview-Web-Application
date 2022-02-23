@@ -5,27 +5,26 @@
         <div class="border border-dark border-2">
             <h3 class="ms-2 mb-4">Livre/Article</h4>
             <form class="ms-4" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
                 <h4>Titre</h4>
                 {{ ticket_form.title }}
                 <h4 class="mt-3">Description</h4>
                 {{ ticket_form.description }}
                 <h4 class="mt-3">Image</h4>
                 {{ ticket_form.image }}
-            </form>
         </div>
     </div>
 
     <div class="container mt-2">
         <div class="border border-dark border-2">
             <h3 class="ms-2 mb-4">Critique</h3>
-            <form class="ms-4" method="post" enctype="multipart/form-data">
+            <div class="ms-4">
                 <h4>Titre</h4>
                 {{ review_form.headline }}
                 <h4 class="mt-3">Note</h4>
                 {{ review_form.rating }}
                 <h4 class="mt-3">Commentaire</h4>
                 {{ review_form.body }}
-                {% csrf_token %}
                 <div class="container mt-5">
                     <div class="d-flex justify-content-between">
                         <button class="btn btn-primary" type="submit" >Sauvegarder</button>
@@ -34,6 +33,7 @@
                         </button>
                     </div>
                 </div>
+            </div>
             </form>
         </div>
     </div>
