@@ -19,6 +19,7 @@ def home(request):
     """
     return render(request, 'review/home.html')
 
+
 @login_required
 def posts(request):
     """
@@ -28,9 +29,13 @@ def posts(request):
     reviews = Review.objects.filter(user=request.user)
     tickets = tickets.annotate(content_type=Value('TICKET', CharField()))
     reviews = reviews.annotate(content_type=Value('REVIEW', CharField()))
-    posts = sorted(chain(reviews, tickets), key=lambda post: post.time_created, reverse=True)
+    posts = sorted(
+        chain(reviews, tickets),
+        key=lambda post: post.time_created,
+        reverse=True)
 
     return render(request, 'review/posts.html', context={'posts': posts})
+
 
 @login_required
 def ticket_creation(request):
@@ -43,7 +48,11 @@ def ticket_creation(request):
             image.user = request.user
             image.save()
             return redirect('home')
-    return render(request, 'review/ticket_creation.html', context={'form': form})
+    return render(
+        request,
+        'review/ticket_creation.html',
+        context={'form': form})
+
 
 @login_required
 def edit_ticket(request, ticket_id: int):
@@ -57,7 +66,11 @@ def edit_ticket(request, ticket_id: int):
         if edit_form.is_valid():
             edit_form.save()
             return redirect('posts')
-    return render(request, 'review/edit_ticket.html', context={'edit_form': edit_form, 'ticket': ticket})
+    return render(
+        request,
+        'review/edit_ticket.html',
+        context={'edit_form': edit_form, 'ticket': ticket})
+
 
 @login_required
 def delete_ticket(request, ticket_id: int):
@@ -70,6 +83,7 @@ def delete_ticket(request, ticket_id: int):
         ticket.save(update_fields=['is_archived'])
         return redirect('posts')
     return render(request, 'review/delete_ticket.html', {'ticket': ticket})
+
 
 @login_required
 def review_creation(request):
@@ -92,6 +106,7 @@ def review_creation(request):
     context = {'ticket_form': ticket_form, 'review_form': review_form}
     return render(request, 'review/review_creation.html', context=context)
 
+
 @login_required
 def review_response_ticket(request, ticket_id: int):
     """
@@ -111,7 +126,11 @@ def review_response_ticket(request, ticket_id: int):
             review.save()
             return redirect('home')
     context = {'review_form': review_form, 'ticket': ticket}
-    return render(request, 'review/review_creation_ticket.html', context=context)
+    return render(
+        request,
+        'review/review_creation_ticket.html',
+        context=context)
+
 
 @login_required
 def edit_review(request, review_id: int):
@@ -123,7 +142,11 @@ def edit_review(request, review_id: int):
         if edit_form.is_valid():
             edit_form.save()
             return redirect('posts')
-    return render(request, 'review/edit_review.html', context={'edit_form': edit_form, 'review': review})
+    return render(
+        request,
+        'review/edit_review.html',
+        context={'edit_form': edit_form, 'review': review})
+
 
 @login_required
 def delete_review(request, review_id: int):
@@ -137,6 +160,7 @@ def delete_review(request, review_id: int):
         return redirect('posts')
     return render(request, 'review/delete_review.html', {'review': review})
 
+
 @login_required
 def flux(request):
     """flux"""
@@ -145,21 +169,24 @@ def flux(request):
     User = get_user_model()
     users = User.objects.all()
 
-    followeds = UserFollows.objects.filter(user=request.user).select_related("followed_user")
+    followeds = UserFollows.objects.filter(
+        user=request.user).select_related("followed_user")
     followeds_group = [user.followed_user for user in followeds]
     followeds_group.append(request.user)
     print(followeds_group)
 
     tickets = tickets.annotate(content_type=Value('TICKET', CharField()))
     reviews = reviews.annotate(content_type=Value('REVIEW', CharField()))
-
     posts = sorted(
         chain(reviews, tickets),
         key=lambda post: post.time_created,
         reverse=True
     )
 
-    return render(request, 'review/flux.html', context={'posts': posts, 'users': users, 'followeds': followeds_group})
+    return render(
+        request, 'review/flux.html',
+        context={'posts': posts, 'users': users, 'followeds': followeds_group})
+
 
 @login_required
 def subscription_view(request):
@@ -171,7 +198,10 @@ def subscription_view(request):
     users = User.objects.all()
     subscriptions = UserFollows.objects.filter(user=request.user)
     subscribers = UserFollows.objects.filter(followed_user=request.user)
-    context = {'users': users, 'subscribers': subscribers, 'subscriptions': subscriptions}
+    context = {
+        'users': users,
+        'subscribers': subscribers,
+        'subscriptions': subscriptions}
     if request.method == 'POST':
         username_search = request.POST.get('research')
         search = User.objects.filter(username=username_search)
@@ -186,21 +216,27 @@ def subscription_view(request):
         return render(request, 'review/subscription.html', context=context)
     return render(request, 'review/subscription.html', context=context)
 
+
 @login_required
 def subscribing(request, adding_follower_id=False, deleting_follower_id=False):
     """
     Add or deleting subscriber
-    'adding_follower_id' and 'deleting_follower_id' will be replaced by the chosen user id
+    'adding_follower_id' and 'deleting_follower_id'
+    will be replaced by the chosen user id
     """
     User = get_user_model()
     users = User.objects.all()
     if adding_follower_id:
         subscribe_to_user = users.get(id=adding_follower_id)
-        followed = UserFollows(user=request.user, followed_user=subscribe_to_user)
+        followed = UserFollows(
+            user=request.user,
+            followed_user=subscribe_to_user)
         followed.save()
         return redirect('subscription')
     if deleting_follower_id:
         get_subscribing_user = users.get(id=deleting_follower_id)
-        delete_subscribe = UserFollows.objects.get(user=request.user, followed_user=get_subscribing_user)
+        delete_subscribe = UserFollows.objects.get(
+            user=request.user,
+            followed_user=get_subscribing_user)
         delete_subscribe.delete()
         return redirect('subscription')
