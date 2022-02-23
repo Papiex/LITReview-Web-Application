@@ -39,7 +39,7 @@ __1- You need to create virtual env with this command :__
 
 *The virtual env is installed in the directory where you are (the path) with your terminal*
 
-- ```python -m venv env```
+- ```python3 -m venv env```
 
 __2- Now you have to activate your virtual env, the default path is :__
 - if you use PowerShell :
@@ -52,7 +52,7 @@ __1- You need to create virtual env with this command :__
 
 *The virtual env is installed in the directory where you are (the path) with your terminal*
 
-- ```python -m venv env```
+- ```python3 -m venv env```
 
 __2- Now you have to activate your virtual env, the default path is :__
 ``` source env/bin/activate```
@@ -62,9 +62,9 @@ __1- You need to create virtual env with this command :__
 
 *The virtual env is installed in the directory where you are (the path) with your terminal*
 
-- ```python -m venv env```
+- ```python3 -m venv env```
 
-__2- Now you have to activate your virtual env, the default path is :__
+__2- Now you have to activate your virtual env, the command is :__
 ``` source env/bin/activate```
 
 ## Libraries
@@ -76,9 +76,10 @@ __This program need some libraries, for installing them, use this command (in yo
 
 ## Run the site
 __To run the site, after activating your virtual environment
-You need to start the server with this command :__
+You need to start the server with this commands :__
 
-- ```python manage.py runserver```
+- ```cd litreview```
+- ```python3 manage.py runserver```
 - Open your browser and go to this url : 127.0.0.1:8000
 
 
