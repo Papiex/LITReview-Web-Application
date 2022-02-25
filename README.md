@@ -72,7 +72,7 @@ __This program need some libraries, for installing them, use this command (in yo
 
 *View requirements.txt to know which library/version is used*
 
-- ```pip install -r requirements.txt```
+- ```pip3 install -r requirements.txt```
 
 ## Run the site
 __To run the site, after activating your virtual environment
@@ -88,14 +88,14 @@ You need to start the server with this commands :__
 ### Create superuser
 __To manage the site, you must create a super user account by following these steps :__
 - At the root of the project 'LITReview-Web-Application/litreview/' , run this command :
-```python manage.py createsuperuser```
+```python3 manage.py createsuperuser```
 - Choose a username
 - Enter your mail
 - Enter your password twice
 
 ![image](https://user-images.githubusercontent.com/81369778/152770521-eba4163a-fbc0-4889-a2bd-e3a6544cc391.png)
 
-- Launch the server with this command : ```python manage.py runserver```
+- Launch the server with this command : ```python3 manage.py runserver```
 - Open your browser and go to this url : 127.0.0.1:8000/admin/
 - Connect with your identifiers previously created.
 
