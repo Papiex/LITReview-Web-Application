@@ -88,7 +88,9 @@ You need to start the server with this commands :__
 ### Create superuser
 __To manage the site, you must create a super user account by following these steps :__
 - At the root of the project 'LITReview-Web-Application/litreview/'
+<br></br>
 Run this command :
+<br></br>
 -```python3 manage.py createsuperuser``` | Windows : ```python manage.py createsuperuser```
 - Choose a username
 - Enter your mail
@@ -96,8 +98,9 @@ Run this command :
 
 ![image](https://user-images.githubusercontent.com/81369778/152770521-eba4163a-fbc0-4889-a2bd-e3a6544cc391.png)
 
-- Launch the server
-- With this command :
+
+Launch the server with this command :
+<br></br>
 - ```python3 manage.py runserver``` | Windows : ```python3 manage.py runserver```
 - Open your browser and go to this url : 127.0.0.1:8000/admin/
 - Connect with your identifiers previously created.
