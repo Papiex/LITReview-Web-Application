@@ -39,7 +39,7 @@ __1- You need to create virtual env with this command :__
 
 *The virtual env is installed in the directory where you are (the path) with your terminal*
 
-- ```python3 -m venv env```
+- ```python -m venv env```
 
 __2- Now you have to activate your virtual env, the default path is :__
 - if you use PowerShell :
@@ -73,6 +73,7 @@ __This program need some libraries, for installing them, use this command (in yo
 *View requirements.txt to know which library/version is used*
 
 - ```pip3 install -r requirements.txt```
+- Windows : ```pip install -r requirements.txt```
 
 ## Run the site
 __To run the site, after activating your virtual environment
@@ -80,6 +81,7 @@ You need to start the server with this commands :__
 
 - ```cd litreview```
 - ```python3 manage.py runserver```
+- Windows : ```python manage.py runserver```
 - Open your browser and go to this url : 127.0.0.1:8000
 
 
@@ -87,15 +89,20 @@ You need to start the server with this commands :__
 
 ### Create superuser
 __To manage the site, you must create a super user account by following these steps :__
-- At the root of the project 'LITReview-Web-Application/litreview/' , run this command :
+- At the root of the project 'LITReview-Web-Application/litreview/'
+Run this command :
 ```python3 manage.py createsuperuser```
+Windows : ```python manage.py createsuperuser```
 - Choose a username
 - Enter your mail
 - Enter your password twice
 
 ![image](https://user-images.githubusercontent.com/81369778/152770521-eba4163a-fbc0-4889-a2bd-e3a6544cc391.png)
 
-- Launch the server with this command : ```python3 manage.py runserver```
+- Launch the server
+- With this command :
+- ```python3 manage.py runserver```
+- Windows : ```python3 manage.py runserver```
 - Open your browser and go to this url : 127.0.0.1:8000/admin/
 - Connect with your identifiers previously created.
 
