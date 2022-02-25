@@ -173,7 +173,6 @@ def flux(request):
         user=request.user).select_related("followed_user")
     followeds_group = [user.followed_user for user in followeds]
     followeds_group.append(request.user)
-    print(followeds_group)
 
     tickets = tickets.annotate(content_type=Value('TICKET', CharField()))
     reviews = reviews.annotate(content_type=Value('REVIEW', CharField()))
