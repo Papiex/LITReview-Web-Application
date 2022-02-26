@@ -12,7 +12,7 @@
                     <p>{{ post.time_created }}</p>
                 </div>
                 <div class="container">
-                    <h4 class="ps-3">{{ post.headline }} - {{ post.rating|safe }}</h4>
+                    <h4 class="ps-3">{{ post.headline }} - {% include 'review/star_snippet.html' %}</h4>
                     <p class="ps-3">{{ post.body }}</p>
                 </div>
             </div>
