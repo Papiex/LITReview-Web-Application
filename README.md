@@ -29,9 +29,9 @@ __It allows to :__
 Python 3.9.0
 ```
 ## Gitbash
-You have to clone the deposit with this command on gitbash and naviguate to the develop branch :
+You have to clone the deposit with this command on gitbash :
 ```
-git clone https://github.com/Papiex/LITReview-Web-Application.git
+git clone https://github.com/Papiex/LITReview-Web-Application
 ```
 
 ## Installation on Windows
