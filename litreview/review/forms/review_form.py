@@ -1,6 +1,7 @@
-from tkinter.messagebox import NO
 from django import forms
+
 from ..models.review import Review
+
 
 class ReviewForm(forms.ModelForm):
     """Review Form"""
@@ -12,7 +13,7 @@ class ReviewForm(forms.ModelForm):
         ('4', '4'),
         ('5', '5'),
     )
-    rating = forms.ChoiceField(widget=forms.RadioSelect(), choices=NOTES)
+    rating = forms.ChoiceField(widget=forms.RadioSelect(attrs = {'class' : 'form-check-input'}), choices=NOTES)
 
 
     class Meta:

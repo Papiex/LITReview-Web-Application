@@ -2,7 +2,7 @@
 {% block content %}
     <h2 class="text-center mt-5 mb-5">Créer une critique</h2>
     <div class="container mb-3">
-        <div class="border border-dark border-2">
+        <div id="color-ticket" class="border border-dark border-2">
             <h3 class="ms-2 mb-4">Livre/Article</h4>
             <form class="ms-4" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
@@ -16,16 +16,20 @@
     </div>
 
     <div class="container mt-2">
-        <div class="border border-dark border-2">
+        <div id="color-review" class="border border-dark border-2">
             <h3 class="ms-2 mb-4">Critique</h3>
             <div class="ms-4">
                 <h4>Titre</h4>
                 {{ review_form.headline }}
                 <h4 class="mt-3">Note</h4>
-                {{ review_form.rating }}
+                {% for radio in review_form.rating %}
+                    <div class="form-check form-check-inline">
+                        {{ radio }}
+                    </div>
+                {% endfor %}
                 <h4 class="mt-3">Commentaire</h4>
                 {{ review_form.body }}
-                <div class="container mt-5">
+                <div class="container mt-5 mb-3">
                     <div class="d-flex justify-content-between">
                         <button class="btn btn-primary" type="submit" >Sauvegarder</button>
                         <button class="btn btn-dark me-4" type="button" >
